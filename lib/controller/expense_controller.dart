@@ -10,9 +10,9 @@ class ExpenseController extends GetxController {
 
   RxList<ExpenseModel> expenseList =
       <ExpenseModel>[].obs;
-
+  RxString searchText="".obs;
   RxBool loading = false.obs;
-
+  RxString selectedFilter = "All".obs;
   final titleController =
   TextEditingController();
 
@@ -113,5 +113,127 @@ class ExpenseController extends GetxController {
 
     Get.back();
   }
+  List<ExpenseModel> get filteredExpenses {
 
+    final search = searchText.value.toLowerCase();
+
+    return expenseList.where((e){
+
+      return
+
+        e.title.toLowerCase().contains(search)
+
+            ||
+
+            e.category.toLowerCase().contains(search)
+
+            ||
+
+            e.amount.toString().contains(search);
+
+    }).toList();
+  }
+  List get filteredExpenseList {
+    if (searchText.value.isEmpty) {
+      return expenseList;
+    }
+
+    return expenseList.where((expense) {
+      return expense.title
+          .toLowerCase()
+          .contains(searchText.value.toLowerCase()) ||
+          expense.category
+              .toLowerCase()
+              .contains(searchText.value.toLowerCase());
+    }).toList();
+  }
+
+///MonthlyExpense()
+  double getMonthlyExpense() {
+
+    double total = 0;
+
+    DateTime now = DateTime.now();
+
+    for (var item in expenseList) {
+
+      if (item.date.month == now.month &&
+          item.date.year == now.year) {
+
+        total += item.amount;
+
+      }
+    }
+
+    return total;
+  }
+///MonthlyTransactionCount()
+  int getMonthlyTransactionCount() {
+
+    DateTime now = DateTime.now();
+
+    return expenseList.where((e) {
+
+      return e.date.month == now.month &&
+          e.date.year == now.year;
+
+    }).length;
+
+  }
+  String currentMonth() {
+
+    List months = [
+
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+
+    ];
+
+    return months[DateTime.now().month - 1];
+
+  }
+  RxDouble totalIncome = 0.0.obs;
+
+  final TextEditingController incomeController =
+  TextEditingController();
+  void addIncome() {
+
+    if (incomeController.text.isEmpty) return;
+
+    totalIncome.value +=
+        double.parse(incomeController.text);
+
+    incomeController.clear();
+
+    Get.back();
+
+  }
+  double getTotalExpense() {
+
+    double total = 0;
+
+    for (var item in expenseList) {
+
+      total += item.amount;
+
+    }
+
+    return total;
+
+  }
+  double getBalance() {
+
+    return totalIncome.value - getTotalExpense();
+
+  }
 }

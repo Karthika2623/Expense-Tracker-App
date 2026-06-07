@@ -48,124 +48,81 @@ class HomeScreen extends StatelessWidget {
 
                 Container(
                   padding: const EdgeInsets.all(25),
-
                   decoration: BoxDecoration(
                     gradient: AppColors.gradient,
 
                     borderRadius: BorderRadius.circular(25),
                   ),
-
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
-                      Center(
-                        child: const Text(
-                          "Total Balance",
-                          style: TextStyle(fontSize: 18, color: Colors.white70),
+
+                      const Text(
+                        "Total Balance",
+                        style: TextStyle(
+                          color: Colors.white70,
                         ),
                       ),
+
                       const SizedBox(height: 10),
-                      Center(
-                        child: Text(
-                          "₹ ${total.toStringAsFixed(2)}",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 34,
-                            fontWeight: FontWeight.bold,
-                          ),
+
+                      Text(
+                        "₹ ${total.toStringAsFixed(2)}",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 34,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 25),
+
+                      const SizedBox(height: 20),
+
                       Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(15),
 
-                              decoration: BoxDecoration(
-                                color: Colors.white24,
-
-                                borderRadius: BorderRadius.circular(18),
+                          Column(
+                            children: [
+                              const Text(
+                                "Income",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                ),
                               ),
-
-                              child: Column(
-                                children: [
-                                  const Icon(
-                                    Icons.arrow_downward,
-
-                                    color: Colors.white,
-                                  ),
-
-                                  const SizedBox(height: 10),
-
-                                  Text(
-                                    "${controller.expenseList.length}",
-
-                                    style: const TextStyle(
-                                      color: Colors.white,
-
-                                      fontSize: 22,
-
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-
-                                  const Text(
-                                    "Transactions",
-
-                                    style: TextStyle(color: Colors.white70),
-                                  ),
-                                ],
+                              Text(
+                                "₹${controller.totalIncome.value}",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
 
-                          const SizedBox(width: 15),
-
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(15),
-
-                              decoration: BoxDecoration(
-                                color: Colors.white24,
-
-                                borderRadius: BorderRadius.circular(18),
+                          Column(
+                            children: [
+                              const Text(
+                                "Expenses",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                ),
                               ),
-
-                              child: Column(
-                                children: [
-                                  const Icon(Icons.wallet, color: Colors.white),
-
-                                  const SizedBox(height: 10),
-
-                                  Text(
-                                    "₹ ${total.toStringAsFixed(0)}",
-
-                                    style: const TextStyle(
-                                      color: Colors.white,
-
-                                      fontSize: 22,
-
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-
-                                  const Text(
-                                    "Expense",
-
-                                    style: TextStyle(color: Colors.white70),
-                                  ),
-                                ],
+                              Text(
+                                "₹${total.toStringAsFixed(0)}",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ],
                       ),
+
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 30),
 
                 Row(

@@ -17,4 +17,10 @@ class FirebaseService {
         .collection("expenses");
 
   }
+  CollectionReference incomeCollection() {
+    return firestore
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("income");
+  }
 }

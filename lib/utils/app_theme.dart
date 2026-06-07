@@ -64,5 +64,23 @@ class AppTheme {
     ),
 
   );
+  static ThemeData darkTheme = ThemeData(
 
+    brightness: Brightness.dark,
+
+    scaffoldBackgroundColor: Colors.black,
+
+    appBarTheme: const AppBarTheme(
+
+      backgroundColor: Colors.black,
+
+      foregroundColor: Colors.white,
+
+    ),
+
+    cardColor: const Color(0xff1E1E1E),
+
+    fontFamily: "Poppins",
+
+  );
 }

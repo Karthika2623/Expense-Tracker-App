@@ -1,6 +1,8 @@
 import 'package:expense_tracker_app/controller/expense_controller.dart';
 import 'package:expense_tracker_app/screens/add_expense/add_expense_screen.dart';
 import 'package:expense_tracker_app/screens/dashboard/home.dart';
+import 'package:expense_tracker_app/screens/monthly_report/monthly_report_screen.dart';
+import 'package:expense_tracker_app/screens/profile/profile_screen.dart';
 import 'package:expense_tracker_app/screens/transactions/transactions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,12 +18,19 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int currentIndex = 0;
 
-  final List<Widget> screens = [HomeScreen(), TransactionsScreen()];
+  final List<Widget> screens = [
+    HomeScreen(),
+    TransactionsScreen(),
+    MonthlyReportScreen(),
+    ProfileScreen(),
+  ];
+
+
   final ExpenseController controller = Get.put(ExpenseController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[currentIndex],
+        body: screens[currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: GestureDetector(
         onTap: () {
@@ -41,53 +50,52 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         ),
       ),
 
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-
-        notchMargin: 10,
-
-        elevation: 10,
-
-        color: Colors.white,
-
-        child: SizedBox(
-          height: 65,
-
+        bottomNavigationBar: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-
+            mainAxisAlignment:
+            MainAxisAlignment.spaceAround,
             children: [
+
               IconButton(
+                icon: const Icon(Icons.home,size: 25,),
                 onPressed: () {
                   setState(() {
                     currentIndex = 0;
                   });
                 },
-                icon: Icon(
-                  Icons.grid_view_rounded,
-                  color: currentIndex == 0 ? Colors.blue : Colors.grey,
-                  size: 28,
-                ),
               ),
-              const SizedBox(width: 40),
+
               IconButton(
+                icon: const Icon(Icons.bar_chart,size: 25,),
                 onPressed: () {
                   setState(() {
                     currentIndex = 1;
                   });
                 },
-                icon: Icon(
-                  Icons.bar_chart,
+              ),
 
-                  color: currentIndex == 1 ? Colors.blue : Colors.grey,
+              IconButton(
+                icon: const Icon(Icons.wallet,size: 25,),
+                onPressed: () {
+                  setState(() {
+                    currentIndex = 2;
+                  });
+                },
+              ),
 
-                  size: 28,
-                ),
+              IconButton(
+                icon: const Icon(Icons.person,size: 25,),
+                onPressed: () {
+                  setState(() {
+                    currentIndex = 3;
+                  });
+                },
               ),
             ],
           ),
-        ),
-      ),
+        )
     );
   }
 }
